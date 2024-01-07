@@ -46,7 +46,9 @@ export default function Home() {
             <Link href="/productos" className={buttonVariants()}>
               Productos Preferidos
             </Link>
-            <Button variant="ghost">Our quality promise &rarr;</Button>
+            <Button variants={buttonVariants({ variant: "ghost" })}>
+              Our quality promise &rarr;
+            </Button>
           </div>
         </div>
 

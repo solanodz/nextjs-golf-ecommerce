@@ -49,7 +49,7 @@ const Navbar = () => {
                     <p></p>
                   ) : (
                     <Link
-                      href="/register"
+                      href="/sign-up"
                       className={buttonVariants({ variant: "default" })}
                     >
                       Registrarse

@@ -20,7 +20,7 @@ import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const {
     register,
     handleSubmit,
@@ -64,11 +64,11 @@ const SignUpPage = () => {
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Image src={logo} alt="" className="w-20 h-20" />
-            <h1 className="text-2xl font-bold">Crea tu cuenta</h1>
+            <h1 className="text-2xl font-bold">Ingresa a tu cuenta</h1>
             <p>
-              ¿Ya tienes una cuenta?
+              ¿No tienes una cuenta?
               <Link
-                href="/sign-in"
+                href="/sign-up"
                 className={buttonVariants({
                   variant: "link",
                   className: "text-green-600 gap-x-2",
@@ -116,10 +116,23 @@ const SignUpPage = () => {
                   )}
                 </div>
                 <Button type="submit" className="w-full py-2">
-                  Crear cuenta
+                  Ingresar
                 </Button>
               </div>
             </form>
+            <div className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 flex items-center"
+              >
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  or
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -127,4 +140,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

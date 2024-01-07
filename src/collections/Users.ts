@@ -1,8 +1,14 @@
-import { CollectionConfig } from "payload/dist/exports/types";
+import { CollectionConfig } from "payload/types";
 
-const Users: CollectionConfig = {
+export const Users: CollectionConfig = {
     slug: "users",
-    auth: true,
+    auth: {
+        verify: {
+            generateEmailHTML: ({token}) => {
+                return `<a href='${process.env.NEXT_PUBLIC_SERVER_URL}/verify-email?token=${token}'>Verificar</a>`
+            }
+        }
+    },
     access: {
         read: () => true,
         create: () => true,
