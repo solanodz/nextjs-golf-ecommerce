@@ -18,9 +18,22 @@ import {
 import { ZodError, z } from "zod";
 import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignInPage = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const isSeller = searchParams.get("as") === "seller";
+  const origin = searchParams.get("origin");
+
+  const continueAsSeller = () => {
+    router.push("?as=seller");
+  };
+
+  const continueAsBuyer = () => {
+    router.replace("/sign-in", undefined);
+  };
+
   const {
     register,
     handleSubmit,
@@ -29,33 +42,33 @@ const SignInPage = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
-  const router = useRouter();
+  const { mutate: signIn, isLoading } = trpc.auth.signIn.useMutation({
+    onSuccess: async () => {
+      toast.success("Iniciaste sesión correctamente");
 
-  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({
-    onError: (error) => {
-      if (error.data?.code === "CONFLICT") {
-        toast.error("El email ya está en uso");
+      router.refresh();
+
+      if (origin) {
+        router.push(`/${origin}`);
         return;
       }
 
-      if (error instanceof ZodError) {
-        toast.error(error.issues[0].message);
+      if (isSeller) {
+        router.push("/sell");
         return;
       }
 
-      toast.error("Algo salió mal, intenta de nuevo.");
+      router.push("/");
     },
-
-    onSuccess: ({ sentToEmail }) => {
-      toast.success(
-        `Cuenta creada exitosamente, se envió un email a ${sentToEmail} para verificar tu cuenta`
-      );
-      router.push("/verify-email?to=" + sentToEmail);
+    onError: (err) => {
+      if (err.data?.code === "UNAUTHORIZED") {
+        toast.error("Credenciales inválidas");
+      }
     },
   });
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    mutate({ email, password });
+    signIn({ email, password });
   };
 
   return (
@@ -64,7 +77,9 @@ const SignInPage = () => {
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Image src={logo} alt="" className="w-20 h-20" />
-            <h1 className="text-2xl font-bold">Ingresa a tu cuenta</h1>
+            <h1 className="text-2xl font-bold">
+              Ingresa a tu cuenta {isSeller ? "de vendedor" : "de cliente"}
+            </h1>
             <p>
               ¿No tienes una cuenta?
               <Link
@@ -133,6 +148,23 @@ const SignInPage = () => {
                 </span>
               </div>
             </div>
+            {isSeller ? (
+              <Button
+                onClick={continueAsBuyer}
+                variant="secondary"
+                disabled={isLoading}
+              >
+                Continuar como comprador
+              </Button>
+            ) : (
+              <Button
+                onClick={continueAsSeller}
+                variant="secondary"
+                disabled={isLoading}
+              >
+                Continuar como vendedor
+              </Button>
+            )}
           </div>
         </div>
       </div>

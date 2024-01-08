@@ -7,9 +7,13 @@ import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import { Span } from "next/dist/trace";
 import Cart from "./Cart";
+import { getServerSideUser } from "@/lib/payload-utils";
+import { cookies } from "next/headers";
+import UserAccountNav from "./UserAccountNav";
 
-const Navbar = () => {
-  const user = null;
+const Navbar = async () => {
+  const nextCookies = cookies();
+  const { user } = await getServerSideUser(nextCookies);
 
   return (
     <div className="bg-white sticky z-50 top-0 inset-x-0 h-16">
@@ -31,9 +35,13 @@ const Navbar = () => {
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:items-center lg:justify-end lg:space-x-6">
                   {/* Boton de iniciar sesion */}
-                  {user ? null : (
+                  {user ? (
+                    <p>
+                      <UserAccountNav user={user} />
+                    </p>
+                  ) : (
                     <Link
-                      href="/login"
+                      href="/sign-in"
                       className={buttonVariants({ variant: "ghost" })}
                     >
                       Iniciar Sesión
