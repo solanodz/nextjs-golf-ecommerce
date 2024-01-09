@@ -78,7 +78,7 @@ export const ProductFiles: CollectionConfig = {
     upload: {
         staticURL: '/product_files',
         staticDir: 'product_files',
-        mimeTypes: ["image/*", "font/*", "application/postscript", "application/pdf", "application/zip", "application/x-zip-compressed", "application/x-rar-compressed", "application/x-7z-compressed", "application/x-tar", "application/x-gzip", "application/x-bzip2", "application/x-apple-diskimage", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.oasis.opendocument.text", "application/vnd.oasis.opendocument.spreadsheet", "application/vnd.oasis.opendocument.presentation", "application/vnd.oasis.opendocument.graphics", "application/vnd.oasis.opendocument.chart", "application/vnd.oasis.opendocument.database", "application/vnd.oasis.opendocument.formula", "application/vnd.oasis.opendocument.image", "application/vnd.oasis.opendocument.text-master"],
+        mimeTypes: ["image/*", "font/*", "application/postscript", "application/pdf", "application/zip"]
     },
     fields: [
         {

@@ -19,7 +19,6 @@ export function formatPrice(
   return new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: currency,
-    notation: notation,
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   }).format(numericPrice)
 }

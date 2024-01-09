@@ -35,13 +35,13 @@ export interface User {
   password: string | null;
 }
 export interface Product {
-  product_files: any;
   id: string;
   user?: (string | null) | User;
   name: string;
   description?: string | null;
   price: number;
-  category: 'bolsas' | 'drives-maderas' | 'wedges';
+  category: 'bolsas' | 'drives_maderas';
+  product_files: string | ProductsFile;
   approvedForSale?: ('pending' | 'approved' | 'denied') | null;
   priceId?: string | null;
   stripeId?: string | null;
@@ -51,6 +51,18 @@ export interface Product {
   }[];
   updatedAt: string;
   createdAt: string;
+}
+export interface ProductsFile {
+  id: string;
+  user?: (string | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
 }
 export interface Media {
   id: string;
@@ -89,18 +101,6 @@ export interface Media {
       filename?: string | null;
     };
   };
-}
-export interface ProductsFile {
-  id: string;
-  user?: (string | null) | User;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
 }
 export interface Order {
   id: string;

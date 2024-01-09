@@ -1,6 +1,4 @@
 
-
-
 export const PRODUCT_CATEGORIES = [
     {
         label: "Bolsas",
@@ -8,24 +6,24 @@ export const PRODUCT_CATEGORIES = [
         featured: [
             {
                 name: "Bolsas mochila",
-                href: '#',
+                href: '/products?category=bolsas-mochila',
                 imagesrc: '/course.jpg',
             },
             {
                 name: "Bolsas para carro",
-                href: '#',
+                href: '/products?category=bolsas-para-carro',
                 imagesrc: '/course.jpg',
             },
             {
                 name: "Bolsas para viaje",
-                href: '#',
+                href: '/products?category=bolsas-para-viaje',
                 imagesrc: '/course.jpg',
             },
         ]
     },
     {
         label: "Palos",
-        value: "drives-maderas" as const,
+        value: "drives_maderas" as const,
         featured: [
             {
                 name: "Drives",
@@ -58,10 +56,10 @@ export const PRODUCT_CATEGORIES = [
                 imagesrc: '/course.jpg',
             },
         ]
-    },
+    }/* ,
     {
         label: "Pelotas y accesorios",
-        value: "wedges" as const,
+        value: "pelotas_accesorios" as const,
         featured: [
             {
                 name: "Pelotas",
@@ -79,6 +77,6 @@ export const PRODUCT_CATEGORIES = [
                 imagesrc: '/course.jpg',
             },
         ]
-    }
+    } */
     
 ]
