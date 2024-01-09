@@ -23,9 +23,9 @@ const perks = [
     Icon: <FaCreditCard />,
   },
   {
-    name: "90 días de devolución",
+    name: "60 días de devolución",
     description:
-      "Si no estas conforme con tu compra o si vino con alguna falla, tenes hasta 90 dias para devolverla. No te preocupes, nosotros nos hacemos cargo.",
+      "Si no estas conforme con tu compra o si vino con alguna falla, tenes hasta 60 dias para devolverla. No te preocupes, nosotros nos hacemos cargo.",
     Icon: <FaArrowRightArrowLeft />,
   },
 ];
